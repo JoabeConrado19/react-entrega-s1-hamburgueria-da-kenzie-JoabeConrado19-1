@@ -35,12 +35,21 @@ function QntToJson (){
       api
         .get("/products")
         .then((response) => setProducts(response.data))
-        .finally(()=>{setLoading(false)});
-    }, []);
+        .finally(()=>setLoading(false),QntToJson(),SetTotal());
+    });
   }
-  useEffect(() => {
-    QntToJson()
-  })
+  
+ 
+
+  function SetTotal(){
+    let soma = 0
+    currentSale.map(element => {
+      soma = soma + element.price*element.Quantidade
+    });
+   
+    setCartTotal(soma)
+
+  }
 
  
   Fetch();
@@ -80,15 +89,15 @@ function QntToJson (){
           <div className="Left-container">
             
            {
-           !filtrar ? <ProductsUl setCurrentSale={setCurrentSale} currentSale={currentSale} produtos={products} CarrinhoVazio={CarrinhoVazio} SetCarrinhoVazio={SetCarrinhoVazio}/>: 
-           <ProductsUl setCurrentSale={setCurrentSale} currentSale={currentSale} produtos={filteredProducts} CarrinhoVazio={CarrinhoVazio} SetCarrinhoVazio={SetCarrinhoVazio} />
+           !filtrar ? <ProductsUl setCurrentSale={setCurrentSale} currentSale={currentSale} produtos={products} CarrinhoVazio={CarrinhoVazio} SetCarrinhoVazio={SetCarrinhoVazio} SetTotal={SetTotal}/>: 
+           <ProductsUl setCurrentSale={setCurrentSale} currentSale={currentSale} produtos={filteredProducts} CarrinhoVazio={CarrinhoVazio} SetCarrinhoVazio={SetCarrinhoVazio}  SetTotal={SetTotal}/>
            }
             
           </div>
         )}
 
         <div className="Rigth-container">
-          <ShoppingCart currentSale={currentSale} setCurrentSale={setCurrentSale} SetCarrinhoVazio={SetCarrinhoVazio} CarrinhoVazio={CarrinhoVazio} cartTotal={cartTotal} setCartTotal={setCartTotal} CartQnt={CartQnt} SetCartQnt={SetCartQnt}/>
+          <ShoppingCart currentSale={currentSale} setCurrentSale={setCurrentSale} SetCarrinhoVazio={SetCarrinhoVazio} CarrinhoVazio={CarrinhoVazio} cartTotal={cartTotal} setCartTotal={setCartTotal} CartQnt={CartQnt} SetCartQnt={SetCartQnt} SetTotal={SetTotal}/>
         </div>
       </div>
       <ToastContainer autoClose={2000} />

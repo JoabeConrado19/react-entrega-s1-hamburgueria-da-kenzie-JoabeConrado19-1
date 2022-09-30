@@ -5,21 +5,26 @@ import { ToastContainer, toast } from "react-toastify";
 const ShoppingCart = (props) => {
 
 
-  
+
+
   
   function Incrementar(element, index){
     
-    props.setCartTotal(props.cartTotal + element.price)
     element.Quantidade = element.Quantidade + 1
-
+    props.setCurrentSale(props.currentSale)
+    
+    props.SetTotal()
+    
     
 
   }
   function Decrementar(element){
-
-      props.setCartTotal(props.cartTotal - element.price)
-    props.SetCartQnt(props.CartQnt - 1)
-    element.Quantidade = element.Quantidade - 1
+    if(element.Quantidade > 0){
+      props.SetCartQnt(props.CartQnt - 1)
+      element.Quantidade = element.Quantidade - 1
+      props.SetTotal()
+    }
+ 
 
   }
 
@@ -38,6 +43,7 @@ const ShoppingCart = (props) => {
       const ListaComRemovido = props.currentSale.filter((item)=>{return item != element })
       props.setCurrentSale(ListaComRemovido)
       props.setCartTotal(props.cartTotal - element.price)
+      props.SetTotal()
       toast.error('Produto Removido do Carrinho!')
       
       

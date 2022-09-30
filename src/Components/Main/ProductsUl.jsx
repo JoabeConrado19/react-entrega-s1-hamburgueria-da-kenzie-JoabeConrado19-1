@@ -16,6 +16,7 @@ const ProductsUl = (props) => {
       toast.success('Produto Adicionado ao carrinho!')
       props.SetCarrinhoVazio(true)
       console.log(props.currentSale)
+      props.SetTotal()
       
     }
     else{
