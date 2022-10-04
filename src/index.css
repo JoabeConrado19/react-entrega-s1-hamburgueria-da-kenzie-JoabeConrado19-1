@@ -213,6 +213,13 @@ header > form > input::placeholder {
   width: 210px;
   height: 247px;
   margin: 10px 15px -10px 15px;
+  transition: ease 0.2s;
+}
+.Products-ul > li:hover {
+  border: 2px solid #7cd8e4a8;
+
+    
+    
 }
 
 .ProductCart-top {

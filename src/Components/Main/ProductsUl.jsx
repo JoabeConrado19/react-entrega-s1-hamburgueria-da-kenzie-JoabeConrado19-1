@@ -11,15 +11,16 @@ const ProductsUl = (props) => {
   
 
   function addToCart2(item) {
-    if(props.currentSale.some(elem => elem === item) == false){
+    if(props.currentSale.some(elem => elem.id === item.id) === false){
       props.setCurrentSale([item, ...props.currentSale]);
       toast.success('Produto Adicionado ao carrinho!')
       props.SetCarrinhoVazio(true)
       console.log(props.currentSale)
       props.SetTotal()
-      
+ 
     }
-    else{
+    else {
+
       toast.error('Produto já existe no carrinho!')
 
     }
@@ -29,7 +30,7 @@ const ProductsUl = (props) => {
   return (
     <ul className="Products-ul">
       {props.produtos.map((element, index) => (
-        <li key={index}>
+        <li key={index} >
           <div className="ProductCart-top">
             <img src={element.img}></img>
           </div>

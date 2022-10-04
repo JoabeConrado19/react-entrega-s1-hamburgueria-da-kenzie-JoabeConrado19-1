@@ -32,6 +32,8 @@ const ShoppingCart = (props) => {
         props.setCurrentSale([])
         props.setCartTotal(0)
         props.SetCarrinhoVazio(false)
+        toast.error('Produtos Removidos do Carrinho!')
+
         
     }
 
